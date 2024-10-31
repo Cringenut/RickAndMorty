@@ -1,5 +1,6 @@
 import "../../../styles/CardPageStyle.css"
 import CharacterCardComponent from "@/app/character/[id]/CharacterCardComponent";
+import {notFound} from "next/navigation";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
     const { id } = await params;
@@ -24,12 +25,17 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 export default async function CharacterPage({ params }: { params: { id: string } }) {
     const { id } = await params;
     const url = `https://rickandmortyapi.com/api/character/${id}`;
+
     let character = null;
     try {
         const response = await fetch(url);
         character = await response.json();
+        if (!character || character.error) {
+            notFound();
+        }
     } catch (err) {
         console.error("Couldn't fetch character:", err);
+        notFound();
     }
 
     return (
