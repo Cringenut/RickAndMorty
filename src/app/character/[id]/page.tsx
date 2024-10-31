@@ -22,21 +22,26 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     }
 }
 
-export default async function CharacterPage({ params }: { params: { id: string } }) {
-    const { id } = await params;
-    const url = `https://rickandmortyapi.com/api/character/${id}`;
-
-    let character = null;
+export async function fetchCharacter({ url }: { url: string }) {
     try {
         const response = await fetch(url);
-        character = await response.json();
+        const character = await response.json();
         if (!character || character.error) {
             notFound();
         }
+        
+        return character
     } catch (err) {
         console.error("Couldn't fetch character:", err);
         notFound();
     }
+}
+
+export default async function CharacterPage({ params }: { params: { id: string } }) {
+    const { id } = await params;
+    const url = `https://rickandmortyapi.com/api/character/${id}`;
+    const character = fetchCharacter(url);
+    
 
     return (
         <div className="container">
