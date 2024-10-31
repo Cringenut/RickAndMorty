@@ -1,10 +1,15 @@
-import "../../../styles/CardPageStyle.css"
+'use client';
 
-export default function CharacterCardComponent({character}) {
+import "../../../styles/CardPageStyle.css";
+import { useRouter } from 'next/navigation';
+
+export default function CharacterCardComponent({ character }) {
+    const router = useRouter();
+
     return (
-        <div className="card">
+        <div className="card" onClick={() => router.push(`/character/${character.id}`)}>
             <div className="card-image">
-                <img src={character.image} alt={character.name}/>
+                <img src={character.image} alt={character.name} />
             </div>
             <div className="card-content">
                 <h1>{character.name}</h1>
@@ -13,10 +18,10 @@ export default function CharacterCardComponent({character}) {
                     <span>{character.species} - {character.status}</span>
                 </div>
                 <div className="location">
-                    Last known location: <br/>
+                    Last known location: <br />
                     <span>{character.location.name}</span>
                 </div>
             </div>
         </div>
-    )
+    );
 }
