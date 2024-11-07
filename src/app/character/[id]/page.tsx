@@ -3,7 +3,7 @@ import CharacterCardComponent from "@/app/character/[id]/CharacterCardComponent"
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
-    const { id } = params;
+    const { id } = await params;
     const url = `https://rickandmortyapi.com/api/character/${id}`;
     try {
         const response = await fetch(url);

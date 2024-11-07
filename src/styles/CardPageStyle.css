@@ -20,6 +20,14 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+.card {
+    cursor: pointer;
+}
+
+.card:hover {
+    cursor: pointer;
+}
+
 .card-image {
     width: 200px;
     aspect-ratio: auto;
