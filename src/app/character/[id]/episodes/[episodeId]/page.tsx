@@ -14,7 +14,6 @@ export async function fetchEpisode({ url }: { url: string }) {
 
         return episode;
     } catch (err) {
-        console.error("Couldn't fetch episode:", err);
         notFound();
     }
 }
@@ -26,7 +25,7 @@ export default async function EpisodePage({ params }: { params: { id: string; ep
 
     const episode = await fetchEpisode({ url: episodeUrl });
     if (!episode.characters.includes(characterUrl)) {
-        throw new Error(`Character with URL ${characterUrl} not found in episode ${episodeId}`);
+        notFound();
     }
 
     const character = await fetchCharacter({ url: characterUrl });

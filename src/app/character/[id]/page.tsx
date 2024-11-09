@@ -32,7 +32,6 @@ export async function fetchCharacter({ url }: { url: string }) {
 
         return character;
     } catch (err) {
-        console.error("Couldn't fetch character:", err);
         notFound();
     }
 }

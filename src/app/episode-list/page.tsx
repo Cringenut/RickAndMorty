@@ -103,7 +103,6 @@ async function fetchEpisodes(season: string, order: string) {
             return 0;
         });
     } catch (error) {
-        console.error("Error fetching episodes:", error);
         return [];
     }
 }
